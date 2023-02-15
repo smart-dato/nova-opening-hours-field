@@ -35,9 +35,6 @@
                 </table-column>
                 <table-column v-if="editable" class="text-right">
                     <default-button @click.prevent="$emit('addInterval', 'week', day.day)"><span class="px-1">+</span></default-button>
-                    <span v-if="Object.values(day.intervals).length" class="ml-2">
-                        <danger-button @click.prevent="$emit('removeAllIntervals', 'week', day.day)"><span class="px-1">-</span></danger-button>
-                    </span>
                 </table-column>
             </tr>
         </tbody>

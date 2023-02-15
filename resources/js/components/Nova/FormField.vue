@@ -33,7 +33,7 @@ import { DependentFormField, HandlesValidationErrors } from 'laravel-nova';
 import WeekTable from "./../WeekTable";
 import ExceptionsTable from "./../ExceptionsTable";
 import {ExceptionsMixin, WeekMixin} from "../../src/mixins";
-import {getRandomDate, getRandomTimeInterval} from "../../src/func";
+import {getRandomDate, getRandomTimeInterval, padStartZero} from "../../src/func";
 export default {
     components: {WeekTable, ExceptionsTable},
 
@@ -59,12 +59,40 @@ export default {
             this.$forceUpdate()
         },
 
+        getPreviousDayData(day) {
+            let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+            let index = days.indexOf(day);
+            if (index < 1) {
+                return [];
+            }
+
+            return this['week'][days[index-1]];
+        },
+
+        calculateNewInterval(day) {
+            let previousDay = this.getPreviousDayData(day);
+            let dayData = this['week'][day];
+
+            if(previousDay.length > dayData.length) {
+                return previousDay[dayData.length];
+            }
+
+            if(dayData.length < 1) {
+                return '07:00-12:00';
+            }
+
+            let newHour = Math.min(parseInt(dayData[dayData.length-1].slice(6, 8)) + 1, 23);
+            let newTime = padStartZero(newHour) + ':00';
+
+            return newTime + '-' + newTime;
+        },
+
         addInterval(weekOrExceptions, dayOrDate) {
             this[weekOrExceptions] = {
                 ...this[weekOrExceptions],
                 [dayOrDate]: [
                     ...this[weekOrExceptions][dayOrDate] || [],
-                    getRandomTimeInterval()
+                    weekOrExceptions === 'week' ? this.calculateNewInterval(dayOrDate) : getRandomTimeInterval()
                 ],
             };
         },

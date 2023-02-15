@@ -40,7 +40,7 @@ export function getRandomDate() {
 //     return padStartZero(hour) + ':' + padStartZero(min)
 // }
 
-function padStartZero(value) {
+export function padStartZero(value) {
     return value.toString().padStart(2, '0')
 }
 
