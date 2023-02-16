@@ -1,5 +1,5 @@
 {
-    "name": "sadekd/nova-opening-hours-field",
+    "name": "smart-dato/nova-opening-hours-field",
     "description": "Laravel Nova custom field for Spatie Opening Hours",
     "keywords": [
         "laravel",
@@ -15,13 +15,13 @@
     },
     "autoload": {
         "psr-4": {
-            "SadekD\\NovaOpeningHoursField\\": "src/"
+            "SmartDato\\NovaOpeningHoursField\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "SadekD\\NovaOpeningHoursField\\FieldServiceProvider"
+                "SmartDato\\NovaOpeningHoursField\\FieldServiceProvider"
             ]
         }
     },

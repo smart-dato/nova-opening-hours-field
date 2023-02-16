@@ -11,6 +11,6 @@ mix.setPublicPath('dist')
             'laravel-nova': 'LaravelNova'
         },
         output: {
-            uniqueName: 'sadekd/nova-opening-hours-field',
+            uniqueName: 'smart-dato/nova-opening-hours-field',
         },
     })
